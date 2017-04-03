@@ -1,9 +1,9 @@
 'use strict';
 
 var express = require('express'),
-   app = require('app'),
+    app = require('app'),
     router = express.Router(),
-
+    bodyParser = require('body-parser'),
     employee = require('app/routes/employee'),
     department = require('app/routes/department'),
     login = require('app/routes/login'),
@@ -12,9 +12,7 @@ var express = require('express'),
     parent = require('app/routes/parent'),
     registration = require('app/routes/registration'),
     qualification = require('app/routes/qualification'),
-    workHistory= require('app/routes/workHistory');
-
-
+    workHistory = require('app/routes/workHistory');
 
 
 //company resource routing
@@ -61,7 +59,6 @@ router.put('/api/v1/company/workHistory', workHistory.updateWorkHistory);
 router.post('/api/v1/company/workHistory', workHistory.addWorkHistory);
 
 
-
 router.post('/api/v1/company/login', login.login);
 router.post('/api/v1/company/logout', login.logout);
 
@@ -83,12 +80,12 @@ module.exports = function (app) {
                 next();
             }
         })
-       /* .all('/api/v1*//*', [authHelper.ensureAuthenticated])
+        //.all('/api/v1', [authHelper.ensureAuthenticated])
         //.use(express.static('apidoc'))
-        .use(express.static('public'))
-        .use(require('morgan')('combined', {"stream": logger.stream}))
+        //.use(express.static('public'))
+        //.use(require('morgan')('combined', {"stream": logger.stream}))
         .use(bodyParser.json({limit: '5mb'}))
-        .use(bodyParser.urlencoded({extended: false}));*/
+        .use(bodyParser.urlencoded({extended: false}));
 
     return router;
 };
