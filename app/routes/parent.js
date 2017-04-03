@@ -58,12 +58,12 @@ function getAllParent(req, res) {
         console.log(input);
        /* var payload = {
             id: input.id,
-            e_fname: input.efname,
-            e_mname: input.emname,
-            eaddress: input.address,
+        fatherName: input.fatherName,
+        motherName: input.motherName,
+        parentAddress: input.parentAddress,
             city: input.city,
             state:input.state,
-            e_pcontact:input.contact,
+        parentContact:input.parentContact,
             updatedAt: moment().unix()
 
         };*/
@@ -105,17 +105,18 @@ function getAllParent(req, res) {
 //var id = req.query.id
         //var input = req.body;
         //console.log(input);
-       /* var payload = {
-            id: input.id,
-            e_fname: input.efname,
-            e_mname: input.emname,
-            eaddress: input.address,
-            city: input.city,
-            state:input.state,
-            e_pcontact:input.contact,
-            createdAt: moment().unix(),
-            updatedAt: moment().unix()
-        };*/
+        /* var payload = {
+         id: input.id,
+         fatherName: input.fatherName,
+         motherName: input.motherName,
+         parentAddress: input.parentAddress,
+         city: input.city,
+         state:input.state,
+         parentContact:input.parentContact,
+         createdAt:moment().unix(),
+         updatedAt: moment().unix()
+
+         };*/
 
         var payload = {
             pId: 501,

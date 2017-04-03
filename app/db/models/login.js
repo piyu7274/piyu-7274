@@ -3,15 +3,16 @@
  */
 module.exports = function (sequelize, DataTypes) {
     return sequelize.define('elogin_info', {
-        id: {
+        eId: {
             type: DataTypes.INTEGER,
-            field: 'eid'
+            field: 'eid',
+            primaryKey:true,
+            autoIncrement:true
         },
         username: {
             type: DataTypes.TEXT,
             field: 'username',
-            primaryKey:true,
-            allowNull: false
+           unique:true
         },
         password: {
             type: DataTypes.TEXT,

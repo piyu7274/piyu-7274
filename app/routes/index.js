@@ -10,6 +10,7 @@ var express = require('express'),
     leave = require('app/routes/leave'),
     monthlyWork = require('app/routes/monthlyWork'),
     parent = require('app/routes/parent'),
+    registration = require('app/routes/registration'),
     qualification = require('app/routes/qualification'),
     workHistory= require('app/routes/workHistory');
 
@@ -60,12 +61,11 @@ router.put('/api/v1/company/workHistory', workHistory.updateWorkHistory);
 router.post('/api/v1/company/workHistory', workHistory.addWorkHistory);
 
 
-/*router.get('/api/v1/company/login', login.);
-router.delete('/api/v1/company/login', login.);
-router.put('/api/v1/company/login', login.);
-router.post('/api/v1/company/login', login.);
-*/
 
+router.post('/api/v1/company/login', login.login);
+router.post('/api/v1/company/logout', login.logout);
+
+router.post('/api/v1/company/registration', registration.addRegistration);
 
 module.exports = function (app) {
     app

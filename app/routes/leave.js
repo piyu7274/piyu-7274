@@ -54,12 +54,16 @@ function getAllLeave(req, res) {
        /* var input = req.body;
         console.log(input);
         var payload = {
-            id: input.id,
-            holiday: input.holiday,
-            leaveday: input.leaveday,
-            address: input.leaveto,
-            updatedAt: moment().unix()
-        };*/
+        lId:id,
+        eId:1,
+        holiday:input.holiday,
+        leaveDays:input.leaveDays,
+        leaveFrom:input.leaveFrom,
+        leaveTo:input.leaveTo,
+        leaveMonth:input.leaveMonth,
+        leaveType:input.leaveType,
+        updatedAt: moment().unix()
+       };*/
         var payload = {
             lId:10,
             eId:1,
@@ -96,13 +100,15 @@ function getAllLeave(req, res) {
 //var id = req.query.id
         //var input = req.body;
         //console.log(input);
-       /* var payload = {
-            id: input.id,
-            holiday: input.holiday,
-            leaveday: input.leaveday,
+      /*  var payload = {
+            lId:id,
+            eId:1,
+            holiday:input.holiday,
+            leaveDays:input.leaveDays,
             leaveFrom:input.leaveFrom,
-            leaveTo: input.leaveto,
-            createdAt: moment().unix(),
+            leaveTo:input.leaveTo,
+            leaveMonth:input.leaveMonth,
+            leaveType:input.leaveType,
             updatedAt: moment().unix()
         };*/
 

@@ -55,7 +55,17 @@ function getAllQualification(req, res) {
     function updateQualification(req, res) {
         //var id = req.query.id
        // var input = req.body;
+       /* var payload = {
+            college:input.college,
+            university:input.university,
+            grad_Type:input.grad_Type,
+            pgrad_Type: input.pgrad_Type,
+            marks10:input.marks10,
+            marks12: input.marks12,
+            grad_per_grade:input.grad_per_grade,
+            updatedAt: moment().unix()
 
+        };*/
 
         var payload = {
             qId: 301,
@@ -96,6 +106,18 @@ function getAllQualification(req, res) {
         //var input = req.body;
         //console.log(input);
 
+      /*  var payload = {
+            college:input.college,
+            university:input.university,
+            grad_Type:input.grad_Type,
+            pgrad_Type: input.pgrad_Type,
+            marks10:input.marks10,
+            marks12: input.marks12,
+            grad_per_grade:input.grad_per_grade,
+            createdAt:moment().unix(),
+            updatedAt: moment().unix()
+
+        };*/
         var payload = {
             qId: 301,
             eId:1,

@@ -37,7 +37,7 @@ function getemployeeById(req, res) {
 function getAllEmployee(req, res) {
     debug('==>Searching devices  : ');
 
-    var condition={}
+    var condition={ attributes: ['eId', 'name', 'age', 'address', 'Email','contactNo','postalcode','gender','currentExp','marritalStatus']}
     employeeService.getAllEmployee(condition, function (err, result) {
         if (err) {
             debug('==>caught error in searching for employees : ');
@@ -86,7 +86,7 @@ function getAllEmployee(req, res) {
         var condition = {
             where: {
                 id:1 },
-                attributes: ['id', 'name', 'age', 'address', 'Email','contactNo','postalcode','gender','currentExp','marritalStatus']
+                attributes: ['eId', 'name', 'age', 'address', 'Email','contactNo','postalcode','gender','currentExp','marritalStatus']
             }
 
 

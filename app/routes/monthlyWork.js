@@ -58,12 +58,12 @@ function getAllMonthlyWork(req, res) {
         console.log(input);
         /*var payload = {
             id: input.id,
-            workhour: input.work_hour,
-            days_off: input.daysoff,
-            overTime: input.overtime,
-            startdate: input.w_fromdate,
-            enddate:input.w_todate,
-            month:input.work_month,
+         workHour: input.workHour,
+         daysOff: input.daysOff,
+            overTime: input.overTime,
+         fromDate: input.fromDate,
+         toDate:input.toDate,
+         workMonth:input.workMonth,
             updatedAt: moment().unix()
         };*/
         var payload = {
@@ -75,7 +75,6 @@ function getAllMonthlyWork(req, res) {
             fromDate: '05/01/17',
             toDate:'29/01/17',
             workMonth:'january',
-            createdAt: moment().unix(),
             updatedAt: moment().unix()
         };
         var condition = {
@@ -104,16 +103,16 @@ function getAllMonthlyWork(req, res) {
         //var input = req.body;
         //console.log(input);
         /*var payload = {
-            id: input.id,
-            workhour: input.work_hour,
-            days_off: input.daysoff,
-            overTime: input.overtime,
-            startdate: input.w_fromdate,
-            enddate:input.w_todate,
-            month:input.work_month,
-            createdAt: moment().unix(),
-            updatedAt: moment().unix()
-        };*/
+         id: input.id,
+         workHour: input.workHour,
+         daysOff: input.daysOff,
+         overTime: input.overTime,
+         fromDate: input.fromDate,
+         toDate:input.toDate,
+         workMonth:input.workMonth,
+         createdAt: moment().unix(),
+         updatedAt: moment().unix()
+         };*/
         var payload = {
             mId: 201,
             eId:1,

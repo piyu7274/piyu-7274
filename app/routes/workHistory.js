@@ -55,18 +55,16 @@ function getAllWorkHistory(req, res) {
       //  var input = req.body;
         //console.log(input);
         /*var payload = {
-            id: input.id,
-            Cname: input.companyName,
-            ename: input.name,
-            address: input.address,
-            city: input.city,
-            state:input.state,
-            mobN0:input.mobNo,
-            officecontact:input.officeContact,
-            createdAt: moment().unix(),
-            updatedAt: moment().unix()
+         companyName: input.companyName,
+         name: input.name,
+         address: input.address,
+         city: input.city,
+         state:input.state,
+         employee_mob:input.employee_mob,
+         officeContact:input.officeContact,
+         updatedAt: moment().unix()
 
-        };*/
+         };*/
         var payload = {
             wId: 401,
             eId: 1,
@@ -106,14 +104,14 @@ function getAllWorkHistory(req, res) {
         //var input = req.body;
         //console.log(input);
         /*var payload = {
-            wId: input.id,
-            Cname: input.companyName,
-            ename: input.name,
+         companyName: input.companyName,
+            name: input.name,
             address: input.address,
             city: input.city,
             state:input.state,
-            mobN0:input.mobNo,
-            officecontact:input.officeContact,
+         employee_mob:input.employee_mob,
+         officeContact:input.officeContact,
+         createdAt: moment().unix(),
             updatedAt: moment().unix()
 
         };*/
