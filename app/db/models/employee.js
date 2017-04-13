@@ -3,7 +3,7 @@
  */
 module.exports = function (sequelize, DataTypes) {
     return sequelize.define('epersonel_info', {
-        id: {
+        eId: {
             type: DataTypes.INTEGER,
             field: 'eid',
             primaryKey: true,
@@ -24,12 +24,17 @@ module.exports = function (sequelize, DataTypes) {
             field: 'eaddress'
         },
       DOB: {
-          type: DataTypes.TEXT,
+          type: DataTypes.DATE,
           field: 'edob'
       },
         city: {
             type: DataTypes.TEXT,
             field: 'city'
+
+        },
+         state: {
+            type: DataTypes.TEXT,
+            field: 'state'
 
         },
         contactNo: {

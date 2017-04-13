@@ -42,12 +42,12 @@ module.exports = function (sequelize, DataTypes) {
         },
         grad_per_grade: {
             type: DataTypes.TEXT,
-            field: 'grad_type'
+            field: 'grad_per_grade'
         },
 
         createdAt: {
             type: DataTypes.DATE,
-            field: 'craetedat'
+            field: 'createdat'
         },
         updatedAt: {
             type: DataTypes.DATE,

@@ -12,7 +12,7 @@ var auth = {
     decodeToken: function (authorization, callback) {
         var token = authorization.split(' ')[1];
         try {
-            var payload = jwt.decode(token, config.token.secret);
+            var payload = jwt.decode(token, 'abc');
             callback(null, payload);
         } catch (err) {
             callback({message: err.message})
@@ -23,11 +23,8 @@ var auth = {
         var payload = {
             sub: user.id,
             eId: user.eId,
-            exp: moment().add(config.token.expiry, 'seconds').unix()
+            exp: moment().add(80400, 'seconds').unix()
         };
-        if(user.name){
-            payload.name = user.name
-        }
         if(user.username){
             payload.username = user.username
         }
@@ -40,11 +37,13 @@ var auth = {
         }
 
         debug('--->JWT Payload - ', payload);
-        return callback(null, jwt.encode(payload, config.token.secret));
+        return callback(null, jwt.encode(payload,'abc'));
     },
 
 
     ensureAuthenticated: function (req, res, next) {
+
+        console.log("=======ensureAuthenticated=================");
         if (!req.headers.authorization) {
 
             return res.status(401).send({message: 'Please make sure your request has an Authorization header'});
@@ -64,10 +63,10 @@ var auth = {
 
                 return res.status(401).json({message: "Expired token"});
             }
-            if (!payload.schoolId && (payload.role !== 'superadmin')) {
-                return res.status(401).json({message: "school id is missing"});
+            if (!payload.eId ) {
+                return res.status(401).json({message: "id is missing"});
             }
-            payload.id = payload.sub;
+            payload.eId = payload.sub;
             req.user = payload;
             return next();
         })

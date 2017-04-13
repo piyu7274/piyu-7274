@@ -22,7 +22,7 @@ function getQualificationById(req, res) {
     debug('==>Searching qualification  : ');
     var id = req.params.id;
     var condition = {
-        where: {qId: id},
+        where: {eId: id},
         attributes: ['qId', 'eId', 'college', 'university', 'grad_Type','pgrad_Type','marks10','marks12','grad_per_grade']
     }
     qualificationService.getQualificationById(condition, function (err, result) {
@@ -53,9 +53,10 @@ function getAllQualification(req, res) {
 }
 
     function updateQualification(req, res) {
-        //var id = req.query.id
-       // var input = req.body;
-       /* var payload = {
+       var id = req.params.id
+       var input = req.body;
+       var payload = {
+        eId:id,
             college:input.college,
             university:input.university,
             grad_Type:input.grad_Type,
@@ -65,9 +66,9 @@ function getAllQualification(req, res) {
             grad_per_grade:input.grad_per_grade,
             updatedAt: moment().unix()
 
-        };*/
+        };
 
-        var payload = {
+        /* var payload = {
             qId: 301,
             eId:1,
             college:'NRI Institue',
@@ -79,10 +80,10 @@ function getAllQualification(req, res) {
             grad_per_grade:'A',
             updatedAt: moment().unix()
 
-        };
+        };*/
         var condition = {
             where: {
-                qId: 301, eId: 1
+             qId: 1
             },
 
             attributes: ['qId', 'eId', 'college', 'university', 'grad_Type','pgrad_Type','marks10','marks12','grad_per_grade']
@@ -102,11 +103,12 @@ function getAllQualification(req, res) {
 
 
     function addQualification(req, res) {
-//var id = req.query.id
-        //var input = req.body;
-        //console.log(input);
+       // var id = req.params.id
+        var input = req.body;
+        console.log(input);
 
-      /*  var payload = {
+       var payload = {
+            eId:input.eId,
             college:input.college,
             university:input.university,
             grad_Type:input.grad_Type,
@@ -117,8 +119,8 @@ function getAllQualification(req, res) {
             createdAt:moment().unix(),
             updatedAt: moment().unix()
 
-        };*/
-        var payload = {
+        };
+        /*var payload = {
             qId: 301,
             eId:1,
             college:'NRI',
@@ -131,10 +133,10 @@ function getAllQualification(req, res) {
             createdAt:moment().unix(),
             updatedAt: moment().unix()
 
-        };
+        };*/
         var condition = {
             where: {
-                qId:301,eId:1
+               eId:input.eId
             }
 
             //attributes: ['qId', 'eId', 'college', 'university', 'grad_Type','pgrad_Type','marks10','marks12','grad_per_grade']
@@ -154,10 +156,9 @@ function getAllQualification(req, res) {
 
 
         debug('==>Searching qualification : ');
-        var id = req.query.id;
-        var condition = {
-            where: {id: id}
-            //attributes: ['qId', 'eId', 'college', 'university', 'grad_Type','pgrad_Type','marks10,'marks12','grad_per_grade']
+        var id = req.params.id;
+       var condition = {
+            where: {eId: id}
         }
         qualificationService.deleteQualification(condition, function (err, result) {
             if (err) {

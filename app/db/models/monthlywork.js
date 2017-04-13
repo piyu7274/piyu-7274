@@ -26,11 +26,11 @@ module.exports = function (sequelize, DataTypes) {
             field: 'overtime'
         },
         fromDate: {
-            type: DataTypes.TEXT,
+            type: DataTypes.DATE,
             field: 'w_fromdate'
         },
         toDate: {
-            type: DataTypes.TEXT,
+            type: DataTypes.DATE,
             field: 'w_todate'
         },
 

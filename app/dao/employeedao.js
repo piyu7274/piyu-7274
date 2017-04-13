@@ -21,6 +21,9 @@ function findEmployeeById(condition,cb) {
     console.log('==>Invoking findOne function in dao');
     MEmployee.findOne(condition)
         .then(function (result) {
+            if(!result){
+                cb(null, {message: 'Data Not Found'});
+            }
             console.log(result);
             return cb(null, result.dataValues);
         }, function (err) {
@@ -32,7 +35,7 @@ function findEmployeeById(condition,cb) {
 
 
 function findAllEmployee(condition,cb) {
-    console.log('==>Invoking findOne function in dao');
+    console.log('==>Invoking findAll function in dao');
     MEmployee.findAll(condition)
         .then(function (result) {
            //console.log(result);
@@ -90,13 +93,7 @@ function findAllEmployee(condition,cb) {
     function addEmployee(payload, condition, cb) {
         console.log('==>Invoking find function in dao');
         console.log('dao:', MEmployee);
-        MEmployee.find(condition)
-            .then(function (result) {
-                console.log(result)
-                if (result) {
-                    return cb(null, {code: 409, message: 'employee exists'});
-                }
-                console.log(payload);
+        
                 MEmployee.build(payload).save()
                     .then(function (result) {
                         console.log("successfully added");
@@ -104,14 +101,12 @@ function findAllEmployee(condition,cb) {
                     }, function (err) {
                         console.log(err);
                         cb(err);
-                    });
+                    })
 
-            }, function (err) {
-                cb(err);
-            });
-
+            
 
     }
+
 
     module.exports = employee;
 

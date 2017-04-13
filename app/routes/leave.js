@@ -22,7 +22,7 @@ function getLeaveById(req, res) {
     debug('==>Searching devices  : ');
     var id = req.params.id;
     var condition = {
-        where: {lId: id},
+        where: {eId: id},
         attributes: ['lId', 'eId','holiday', 'leaveDays', 'leaveFrom', 'leaveTo','leaveType','leaveMonth']
     }
     leaveService.getLeaveById(condition, function (err, result) {
@@ -50,12 +50,11 @@ function getAllLeave(req, res) {
 }
 
     function updateLeave(req, res) {
-        //var id = req.query.id
-       /* var input = req.body;
+        var id = req.params.id
+       var input = req.body;
         console.log(input);
         var payload = {
-        lId:id,
-        eId:1,
+        eId:id,
         holiday:input.holiday,
         leaveDays:input.leaveDays,
         leaveFrom:input.leaveFrom,
@@ -63,8 +62,8 @@ function getAllLeave(req, res) {
         leaveMonth:input.leaveMonth,
         leaveType:input.leaveType,
         updatedAt: moment().unix()
-       };*/
-        var payload = {
+       };
+       /* var payload = {
             lId:10,
             eId:1,
             holiday:23,
@@ -74,10 +73,10 @@ function getAllLeave(req, res) {
             leaveMonth:'january',
             leaveType:'sick leave',
             updatedAt: moment().unix()
-        };
+        };*/
         var condition = {
             where: {
-                lId:10
+                eId:id
             },
 
             attributes: ['lId', 'eId','holiday', 'leaveDays', 'leaveFrom', 'leaveTo','leaveType','leaveMonth']
@@ -98,11 +97,10 @@ function getAllLeave(req, res) {
 
     function addLeave(req, res) {
 //var id = req.query.id
-        //var input = req.body;
-        //console.log(input);
-      /*  var payload = {
-            lId:id,
-            eId:1,
+        var input = req.body;
+        console.log(input);
+       var payload = {
+            eId:input.eId,
             holiday:input.holiday,
             leaveDays:input.leaveDays,
             leaveFrom:input.leaveFrom,
@@ -110,8 +108,8 @@ function getAllLeave(req, res) {
             leaveMonth:input.leaveMonth,
             leaveType:input.leaveType,
             updatedAt: moment().unix()
-        };*/
-
+        };
+/*
         var payload = {
             lId:10,
             eId:1,
@@ -122,7 +120,7 @@ function getAllLeave(req, res) {
             leaveMonth:'january',
             leaveType:'sick leave',
             updatedAt: moment().unix()
-        };
+        };*/
         /*var condition = {
             where: {
                 lId:10
@@ -132,7 +130,7 @@ function getAllLeave(req, res) {
         }
 */
         var condition={
-            where:{lId:10,eId:1}
+            where:{eId:input.eId}
         }
         leaveService.addLeave(payload, condition, function (err, result) {
             if (err) {
@@ -145,13 +143,10 @@ function getAllLeave(req, res) {
 
     }
     function deleteLeave(req, res) {
-
-
         debug('==>Searching leave : ');
-        var id = req.query.id;
+        var id = req.params.id;
         var condition = {
-            where: {id: id}
-            //attributes: ['id', 'name', 'age', 'address', 'salary']
+            where: {eId: id}
         }
         leaveService.deleteLeave(condition, function (err, result) {
             if (err) {

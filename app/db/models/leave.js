@@ -24,7 +24,7 @@ module.exports = function (sequelize, DataTypes) {
             field: 'leavedays'
         },
         leaveFrom: {
-            type: DataTypes.TEXT,
+            type: DataTypes.DATE,
             field: 'leavefrom'
         },
         leaveType: {
@@ -32,7 +32,7 @@ module.exports = function (sequelize, DataTypes) {
             field: 'leavetype'
         },
         leaveTo: {
-            type: DataTypes.TEXT,
+            type: DataTypes.DATE,
             field: 'leaveto'
         },
         leaveMonth: {

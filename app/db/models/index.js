@@ -12,7 +12,6 @@ var models = {
     Login: db.sequelize.import(__dirname + '/login'),
     Leave: db.sequelize.import(__dirname + '/leave'),
     MonthlyWork: db.sequelize.import(__dirname + '/monthlywork'),
-    Parent: db.sequelize.import(__dirname + '/parent'),
     Qualification: db.sequelize.import(__dirname + '/qualificationdetail'),
     WorkingHistory: db.sequelize.import(__dirname + '/workingHistory')
 

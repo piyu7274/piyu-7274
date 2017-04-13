@@ -6,30 +6,15 @@ require('rootpath')();
 var _ = require('lodash'),
     authHelper = require('app/helper/auth'),
     debug = require('debug')('app.helper.auth'),
-    MLogin= require('../db/models/login'),
-    moment = require('moment')
+    MLogin = require('app/db/models').Login,
+    moment = require('moment'),
+    employeeService = require('app/services/employeeService');
 
 
 var init = {
     login: userLogin,
     logout: logout
 };
-/*
-function login(req, res, next) {
-    var input = req.body;
-    var waterfall = [verifyLogin.bind(null, input),
-        encodeUserInfo.bind(null)];
-
-    async.waterfall(waterfall, function (err, result) {
-        if (err) {
-            return res.status(err.code).send({message: err.message});
-        }
-        if (!result) {
-            return res.status(result.code).send({message: 'something went wrong'});
-        }
-        res.status(result.code).send({message: 'login successful', token: result});
-    });
-}*/
 
 function userLogin(req, res, next) {
     console.log("****************** in login ********************");
@@ -46,12 +31,12 @@ function userLogin(req, res, next) {
             }
         };
         var employeeCondition = {
-            where: {
-                eid: result.eId
+           /* where: {
+                eid: result.eId*/
             }
-        };
+        
         if (result) {
-            employeeDao.getemployeeById(employeeCondition, function (err, employee) {
+            employeeService.getAllEmployee(employeeCondition, function (err, employee) {
                 if (err) {
                     return res.status(500).send({message: err.message});
                 }
@@ -67,14 +52,15 @@ function userLogin(req, res, next) {
             if (err) {
                 return res.status(500).send({message: err.message});
             }
-            res.status(200).send({message: 'login successful', role: result.role, token: token, adminId: result.id});
+            res.status(200).send({message: 'login successful', token: token, adminId: result.id});
         });
 
     });
 }
 
 function logout(req, res, next) {
-    req.headers.authorization = null;
+    console.log("=====Logout=====");
+    req.headers.authorization ='';
     res.status(200).send({message: 'logout successful', token: null});
 }
 
@@ -83,7 +69,7 @@ var verifyLogin = function (input, callback) {
         where: {username:'piyu7274', password: input.password}
     }*/
     MLogin.findOne({
-        where: {username:input.username, password: input.password}
+        where: {username:(input.username).trim().toLowerCase() , password: input.password}
     }).then(function (data) {
         if (!data) {
             return callback({code: 401, message: 'Permission denied, wrong credentials'});

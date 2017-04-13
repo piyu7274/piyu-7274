@@ -53,13 +53,15 @@ function getAllEmployee(condition, cb) {
             var id = employee.eId;
             var employeeObj = employee[id];
             employeeObj = {
-                eId: employee.eId,
+                eId: id,
                 name: employee.name ? employee.name : '-',
                 age: employee.age ? employee.age : '-',
                 DOB: employee.DOB ? employee.DOB : '-',
                 Email: employee.Email ? employee.Email : '-',
                 address: employee.address ? employee.address : '-',
                 city: employee.city ? employee.city : '-',
+                state: employee.state ? employee.state : '-',
+                postalCode: employee.postalCode ? employee.postalCode : '-',
                 contactNo: employee.contactNo ? employee.contactNo : '-',
                 qualification: employee.qualification? employee.qualification : '-',
                 gender: employee.gender ? employee.gender : '-',

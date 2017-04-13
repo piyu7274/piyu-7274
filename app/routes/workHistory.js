@@ -22,8 +22,8 @@ function getWorkHistoryById(req, res) {
     debug('==>Searching workhistory  : ');
     var id = req.params.id;
     var condition = {
-        where: {wId: id},
-        attributes: ['wId', 'eId', 'name','companyname', 'address', 'city', 'state', 'companyName','employee_mob', 'officeContact']
+         where: {eId: id},
+        attributes: ['wId', 'eId','companyname', 'address', 'city', 'state', 'companyName','employee_mob', 'officeContact']
     }
     workHistoryService.getWorkHistoryById(condition, function (err, result) {
         if (err) {
@@ -39,7 +39,7 @@ function getWorkHistoryById(req, res) {
 function getAllWorkHistory(req, res) {
     debug('==>Searching workHistory  : ');
 
-    var condition={   attributes: ['wId', 'eId', 'name','companyname', 'address', 'city', 'state', 'companyName','employee_mob', 'officeContact']}
+    var condition={   attributes: ['wId', 'eId','companyname', 'address', 'city', 'state', 'companyName','employee_mob', 'officeContact']}
     workHistoryService.getAllWorkHistory(condition, function (err, result) {
         if (err) {
             debug('==>caught error in searching for employees : ');
@@ -51,12 +51,12 @@ function getAllWorkHistory(req, res) {
 }
 
     function updateWorkHistory(req, res) {
-        //var id = req.query.id
-      //  var input = req.body;
-        //console.log(input);
-        /*var payload = {
+        var id = req.params.id
+       var input = req.body;
+        console.log(input);
+        var payload = {
+         eId:id,
          companyName: input.companyName,
-         name: input.name,
          address: input.address,
          city: input.city,
          state:input.state,
@@ -64,8 +64,8 @@ function getAllWorkHistory(req, res) {
          officeContact:input.officeContact,
          updatedAt: moment().unix()
 
-         };*/
-        var payload = {
+         };
+      /*  var payload = {
             wId: 401,
             eId: 1,
             name: 'avdhesh',
@@ -78,12 +78,12 @@ function getAllWorkHistory(req, res) {
             createdAt: moment().unix(),
             updatedAt: moment().unix()
 
-        };
+        };*/
         var condition = {
             where: {
-                wId: 401,eId:1 },
+               eId:id},
 
-            attributes: ['wId', 'eId', 'name','companyname', 'address', 'city', 'state', 'companyName','employee_mob', 'officeContact']
+            attributes: ['wId', 'eId','companyname', 'address', 'city', 'state', 'companyName','employee_mob', 'officeContact']
             }
 
 
@@ -101,11 +101,12 @@ function getAllWorkHistory(req, res) {
 
     function addWorkHistory(req, res) {
 //var id = req.query.id
-        //var input = req.body;
-        //console.log(input);
-        /*var payload = {
-         companyName: input.companyName,
-            name: input.name,
+        var input = req.body;
+        console.log(input);
+        var payload = {
+            eId:input.eId,
+            companyName: input.companyName,
+            //name: input.name,
             address: input.address,
             city: input.city,
             state:input.state,
@@ -114,8 +115,8 @@ function getAllWorkHistory(req, res) {
          createdAt: moment().unix(),
             updatedAt: moment().unix()
 
-        };*/
-        var payload = {
+        };
+        /*var payload = {
             wId: 401,
             eId: 1,
             name: 'avdhesh',
@@ -128,10 +129,10 @@ function getAllWorkHistory(req, res) {
             createdAt: moment().unix(),
             updatedAt: moment().unix()
 
-        };
+        };*/
         var condition = {
             where: {
-                wId:401,eId:1
+              eId:input.eId
             }
 
             //attributes: ['wId', 'eId', 'name','companyname', 'address', 'city', 'state', 'companyName', 'officeContact']

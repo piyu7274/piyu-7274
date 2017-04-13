@@ -21,6 +21,9 @@ function findDepartmentById(condition,cb) {
     console.log('==>Invoking findOne function in dao');
     MDepartment.findOne(condition)
         .then(function (result) {
+            if(!result){
+                cb(null, {message: 'Data Not Found'});
+            }
             console.log(result);
             return cb(null, result.dataValues);
         }, function (err) {

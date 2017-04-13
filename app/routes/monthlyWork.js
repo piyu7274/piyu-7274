@@ -22,7 +22,7 @@ function getMonthlyWorkById(req, res) {
     debug('==>Searching monthlyWork  : ');
     var id = req.params.id;
     var condition = {
-        where: {mId: id},
+         where: {eId: id},
         attributes: ['mId', 'eId','workHour', 'daysOff', 'overTime', 'fromDate', 'toDate', 'workMonth']
     }
     monthlyWorkService.getMonthlyWorkById(condition, function (err, result) {
@@ -53,20 +53,20 @@ function getAllMonthlyWork(req, res) {
 }
 
     function updateMonthlyWork(req, res) {
-        //var id = req.query.id
+        var id = req.params.id
         var input = req.body;
         console.log(input);
-        /*var payload = {
-            id: input.id,
+        var payload = {
+         eId: id,
          workHour: input.workHour,
          daysOff: input.daysOff,
-            overTime: input.overTime,
+         overTime: input.overTime,
          fromDate: input.fromDate,
          toDate:input.toDate,
          workMonth:input.workMonth,
-            updatedAt: moment().unix()
-        };*/
-        var payload = {
+         updatedAt: moment().unix()
+        };
+        /*var payload = {
             mId: 201,
             eId:1,
             workHour: 12.0,
@@ -76,10 +76,10 @@ function getAllMonthlyWork(req, res) {
             toDate:'29/01/17',
             workMonth:'january',
             updatedAt: moment().unix()
-        };
+        };*/
         var condition = {
             where: {
-                mId:201,eId:1
+               eId:id
             },
 
                 attributes: ['mId', 'eId','workHour', 'daysOff', 'overTime', 'fromDate', 'toDate', 'workMonth']
@@ -99,11 +99,10 @@ function getAllMonthlyWork(req, res) {
 
 
     function addMonthlyWork(req, res) {
-//var id = req.query.id
-        //var input = req.body;
-        //console.log(input);
-        /*var payload = {
-         id: input.id,
+        var input = req.body;
+        console.log(input);
+        var payload = {
+         eId: input.eId,
          workHour: input.workHour,
          daysOff: input.daysOff,
          overTime: input.overTime,
@@ -112,8 +111,8 @@ function getAllMonthlyWork(req, res) {
          workMonth:input.workMonth,
          createdAt: moment().unix(),
          updatedAt: moment().unix()
-         };*/
-        var payload = {
+         };
+        /*var payload = {
             mId: 201,
             eId:1,
             workHour:10,
@@ -124,10 +123,10 @@ function getAllMonthlyWork(req, res) {
             workMonth:'january',
             createdAt: moment().unix(),
             updatedAt: moment().unix()
-        };
+        };*/
         var condition = {
             where: {
-                mId:201,eId:1
+               eId: input.eId
             }
 
             //attributes: ['mId', 'eId','workHour', 'daysOff', 'overTime', 'fromDate', 'toDate', 'workMonth']
@@ -144,13 +143,10 @@ function getAllMonthlyWork(req, res) {
 
     }
     function deleteMonthlyWork(req, res) {
-
-
         debug('==>Searching monthlyWork : ');
-        var id = req.query.id;
+        var id = req.params.id;
         var condition = {
-            where: {id: id}
-            //attributes: ['id', 'name', 'age', 'address', 'salary']
+            where: {eId: id}
         }
         monthlyWorkService.deleteMonthlyWork(condition, function (err, result) {
             if (err) {

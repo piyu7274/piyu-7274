@@ -13,10 +13,6 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.INTEGER,
             field: 'eid'
         },
-        name: {
-            type: DataTypes.TEXT,
-            field: 'ename'
-        },
         companyName: {
             type: DataTypes.TEXT,
             field: 'companyname'

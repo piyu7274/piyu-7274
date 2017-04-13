@@ -21,7 +21,7 @@ var department = {
      debug('==>Searching department  : ');
      var id = req.params.id;
      var condition = {
-         where: {dId: id},
+          where: {eId: id},
          attributes: ['dId','eId', 'designation', 'department', 'monthlySalary']
      }
      departmentService.getDepartmentById(condition, function (err, result) {
@@ -53,18 +53,18 @@ function getAllDepartment(req, res) {
 // return res.status(200).json({"result":"abcd"})
 
      function updateDepartment(req, res) {
-        // var id = req.params.id
-        // var input = req.body;
-         //console.log(input);
-       /*  var payload = {
-             id: input.id,
+         var id = req.params.id
+        var input = req.body;
+         console.log(input);
+         var payload = {
+             eId: input.eId,
              designation: input.designation,
              department: input.department,
-             monthlysalary: input.monthlysalary,
+             monthlySalary: input.monthlySalary,
              updatedAt: moment().unix()
 
-         };*/
-         var payload = {
+         };
+        /* var payload = {
              dId:101,
              eId:1,
              designation:'senior Developer',
@@ -72,10 +72,10 @@ function getAllDepartment(req, res) {
              monthlySalary:60000.00,
              updatedAt: moment().unix()
 
-         };
+         };*/
          var condition = {
              where: {
-                 dId:101,eId:1 },
+               dId:id },
 
                  attributes: ['dId','eId', 'designation', 'department', 'monthlySalary']
              }
@@ -94,19 +94,19 @@ function getAllDepartment(req, res) {
 
 
      function addDepartment(req, res) {
-//var id = req.query.id
-         //var input = req.body;
-         //console.log(input);
-        /* var payload = {
-             id: input.id,
+         //var id = req.params.id
+         var input = req.body;
+         console.log(input);
+         var payload = {
+             eId: input.eId,
              designation: input.designation,
              department: input.department,
-             monthlysalary: input.monthlysalary,
+             monthlySalary: input.monthlySalary,
              createdAt: moment().unix(),
              updatedAt: moment().unix()
 
-         };*/
-         var payload = {
+         };
+         /*var payload = {
              dId:101,
              eId:1,
              designation:'senior Developer',
@@ -114,10 +114,10 @@ function getAllDepartment(req, res) {
              monthlySalary:45000.00,
              updatedAt: moment().unix()
 
-         };
+         };*/
          var condition = {
              where: {
-                 dId:101,eId:1
+                 eId:input.id
              }
          }
 
@@ -132,14 +132,11 @@ function getAllDepartment(req, res) {
 
      }
      function deleteDepartment(req, res) {
-
-
          debug('==>deleting department : ');
          var id = req.params.id;
          var condition = {
-             where: {dId: id}
-             //attributes: ['id', 'name', 'age', 'address', 'salary']
-         }
+            where: {eId: id}
+        }
          departmentService.deleteDepartment(condition, function (err, result) {
              if (err) {
                  debug('==>caught error in deleting for department : ');

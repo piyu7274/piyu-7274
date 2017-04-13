@@ -21,8 +21,11 @@ function findQualificationById(condition,cb) {
     console.log('==>Invoking findOne function in dao');
     MQualification.findOne(condition)
         .then(function (result) {
+            if(!result){
+                cb(null, {message: 'Data Not Found'});
+            }
             console.log(result);
-            return cb(null, result.dataValues);
+            return cb(null, result);
         }, function (err) {
             return cb(err);
         });
@@ -71,7 +74,7 @@ function findAllQualification(condition,cb) {
                 if (result) {
                     MQualification.update(payload, condition)
                         .then(function (result) {
-                            console.log("successfully delete");
+                            console.log("successfully updated");
                             cb(null, {message: 'successfully Updated'});
                         }, function (err) {
                             cb(err);

@@ -3,9 +3,16 @@
  */
 _=require('rootpath');
 var
-    moment = require('moment');
-    debug = require('debug')('app.routes.employee');
-employeeService = require('app/services/employeeService');
+    moment = require('moment'),
+     async = require('async'),
+    debug = require('debug')('app.routes.employee'),
+    employeeDao = require('app/dao/employeedao'),
+    departmentDao = require('app/dao/departmentDao'),
+    leaveDao = require('app/dao/leaveDao'),
+    qualificationDao = require('app/dao/qualificationDao'),
+    monthlyWorkDao = require('app/dao/monthlyWorkDao'),
+    workHistoryDao = require('app/dao/workHistoryDao'),
+    employeeService = require('app/services/employeeService');
 
 
 var employee = {
@@ -21,7 +28,7 @@ function getemployeeById(req, res) {
     debug('==>Searching employees : ');
     var id = req.params.id;
     var condition = {
-        where: {id: id}
+        where: {eId: id}
         //  attributes: ['id', 'name', 'age', 'address', 'contact','postalcode','gender','currentExp','marritalstatus']
     }
     employeeService.getEmployeeById(condition, function (err, result) {
@@ -35,9 +42,9 @@ function getemployeeById(req, res) {
 }
 
 function getAllEmployee(req, res) {
-    debug('==>Searching devices  : ');
+    debug('==>Searching employees  : ');
 
-    var condition={ attributes: ['eId', 'name', 'age', 'address', 'Email','contactNo','postalcode','gender','currentExp','marritalStatus']}
+    var condition={ attributes: ['eId', 'name', 'age', 'DOB','address', 'city','state','Email','contactNo','postalCode','qualification','gender','currentExp','marritalStatus']}
     employeeService.getAllEmployee(condition, function (err, result) {
         if (err) {
             debug('==>caught error in searching for employees : ');
@@ -49,23 +56,27 @@ function getAllEmployee(req, res) {
 }
 
     function updateEmployee(req, res) {
-        //var id = req.query.id
+        var id = req.params.id
         var input = req.body;
         console.log(input);
-       /* var payload = {
+       var payload = {
             id: input.id,
             name: input.name,
             age: input.age,
-            email:input.email,
+            DOB:input.DOB,
+            Email:input.Email,
             address: input.address,
-            contact: input.contact,
-            postalCode: input.postalcode,
+            city:input.city,
+            state:input.state,
+            contactNo :input.contactNo,
+            postalCode: input.postalCode,
+            qualification:input.qualification,
             gender: input.gender,
-            currentExp: input.currentexp,
-            marritalStatus: input.marritalstatus,
+            currentExp: input.currentExp,
+            marritalStatus: input.marritalStatus,
             updatedAt: moment().unix()
-        };*/
-        var payload = {
+        };
+        /*var payload = {
             id: 1,
             name: 'avdhesh',
             age: 30,
@@ -82,11 +93,11 @@ function getAllEmployee(req, res) {
             marritalStatus:'married',
             createdAt: moment().unix(),
             updatedAt: moment().unix()
-        };
+        };*/
         var condition = {
             where: {
                 id:1 },
-                attributes: ['eId', 'name', 'age', 'address', 'Email','contactNo','postalcode','gender','currentExp','marritalStatus']
+                attributes: ['eId', 'name', 'DOB','age', 'address', 'city','state','Email','contactNo','postalcode','gender','currentExp','marritalStatus']
             }
 
 
@@ -103,24 +114,27 @@ function getAllEmployee(req, res) {
 
 
     function addEmployee(req, res) {
-        //var id = req.query.id
-        //var input = req.body;
-        //console.log(input);
-        /*var payload = {
-            id: input.id,
+        var input = req.body;
+        console.log(input);
+        var payload = {
             name: input.name,
+            DOB:input.DOB,
             age: input.age,
+            Email:input.Email,
             address: input.address,
-            contact: input.contact,
-            postalCode: input.postalcode,
+            city:input.city,
+            state:input.state,
+            contactNo: input.contactNo,
+            postalCode: input.postalCode,
+            qualification:input.qualification,
             gender: input.gender,
-            currentExp: input.currentexp,
-            marritalStatus: input.marritalstatus,
+            currentExp: input.currentExp,
+            marritalStatus: input.marritalStatus,
             createdAt: moment().unix(),
             updatedAt: moment().unix()
-        };*/
+        };
 
-
+/*
         var payload = {
             id: 1,
             name: 'avdhesh',
@@ -138,13 +152,13 @@ function getAllEmployee(req, res) {
             marritalStatus:'married',
             createdAt: moment().unix(),
             updatedAt: moment().unix()
-        };
+        };*/
       /* var condition = {
            where: {
                id: input.id },
                attributes: ['id', 'name', 'age', 'Email', 'address', 'contactNo', 'postalCode', 'gender', 'currentExp', 'marritalStatus']
            }*/
-      var condition={}
+      var condition={ attributes: ['eId', 'name', 'DOB','age', 'address', 'city','state','Email','contactNo','postalcode','gender','currentExp','marritalStatus']}
 
         employeeService.addEmployee(payload, condition, function (err, result) {
             if (err) {
@@ -159,21 +173,32 @@ function getAllEmployee(req, res) {
 
     function deleteEmployee(req, res) {
 
-
+        var id =req.params.id;
         debug('==>Searching employees : ');
         //var id = req.query.id;
         var condition = {
-            where: {id: 1}
-            //attributes: ['id', 'name', 'age', 'address', 'salary']
+            where: {eId: id}
         }
-        employeeService.deleteEmployee(condition, function (err, result) {
+
+        var parallelCalls=[employeeDao.deleteEmployee.bind(null,condition),qualificationDao.deleteQualification.bind(null,condition),
+        departmentDao.deleteDepartment.bind(null,condition),leaveDao.deleteLeave.bind(null,condition),monthlyWorkDao.deleteMonthlyWork.bind(null,condition),
+        workHistoryDao.deleteWorkHistory.bind(null,condition)]
+
+
+        async.parallel(parallelCalls,function(err,result){
+            if (err){
+                return res.status(err.code).json({message: err.message});
+            };
+           return res.status(result.code).json(result.message);
+            });
+       /* employeeService.deleteEmployee(condition, function (err, result) {
             if (err) {
                 debug('==>caught error in searching for employees : ');
                 return res.status(err.code).json({message: err.message});
             }
             return res.status(result.code).json(result.message);
 
-        });
+        });*/
     }
 
 module.exports = employee;
